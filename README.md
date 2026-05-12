@@ -81,33 +81,104 @@ The dataset contains labeled 2D MRI images corresponding to four dementia stages
 
 ---
 
+## Results
+
+The ResNet34 transfer learning model achieved strong classification performance across Alzheimer’s disease stages on the test dataset.
+
+### Confusion Matrix
+
+<p align="center">
+  <img src="figures/confusion_matrix.png" width="650">
+</p>
+
+### Performance Summary
+
+| Class | Correct Predictions | Total Samples |
+|---|---:|---:|
+| MildDemented | 78 | 86 |
+| ModerateDemented | 4 | 4 |
+| NonDemented | 324 | 324 |
+| VeryMildDemented | 219 | 226 |
+
+### Key Observations
+
+- The model achieved excellent performance for the **NonDemented** and **VeryMildDemented** classes.
+- Most classification errors occurred between **MildDemented** and **NonDemented**, reflecting the subtle visual differences between early dementia stages.
+- The dataset exhibited substantial class imbalance, particularly for the **ModerateDemented** category with very few samples.
+- Evaluation therefore emphasized not only overall accuracy, but also confusion matrix analysis and macro-level performance metrics.
+
+### Important Consideration
+
+Medical imaging datasets are highly susceptible to **data leakage**, especially when highly similar MRI slices from the same subject appear in both training and testing sets. Future work will incorporate patient-level splitting strategies and external validation to better assess model generalizability.
+
+---
+
+# Training Alzheimer MRI Classification Model with PyTorch
+
+## Prepare Python Environment
+
+```bash
+conda create -n alzheimer-mri python=3.9
+conda activate alzheimer-mri
+
+# Install PyTorch with CUDA support
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+
+# Core libraries
+pip install numpy==1.23.1
+pip install pandas scipy scikit-learn
+
+# Deep learning utilities
+pip install tqdm wandb einops multipledispatch
+
+# Visualization
+pip install matplotlib seaborn plotly
+
+# Image processing
+pip install opencv-python Pillow
+
+# Explainability
+pip install grad-cam
+
+# Jupyter environment
+pip install notebook jupyter ipykernel
+
+# Optional medical imaging support
+pip install nibabel
+```
+
+## Clone Repository
+
+```bash
+git clone https://github.com/phuongov/Classification.git
+cd alzheimers-mri-classification
+```
+
+## Train the Model
+
+```bash
+python train.py
+```
+
+---
+
 ## Project Structure
 
 ```text
 alzheimers-mri-classification/
 │
 ├── data/
-│   ├── raw/
-│   ├── processed/
+│   ├── all/
+│   ├── test/
+│   ├── train/
 │
 ├── notebooks/
-│   ├── exploratory_analysis.ipynb
-│   ├── model_training.ipynb
-│   └── evaluation.ipynb
+│   ├── 01-Resnet34.ipynb
+│   ├── 02-Resnet34.ipynb
 │
-├── src/
-│   ├── datasets/
-│   ├── models/
-│   ├── training/
-│   ├── evaluation/
-│   ├── visualization/
-│   └── utils/
+├── figrues/
+│   ├── confusion_matrix.png
 │
-├── figures/
-│
-├── results/
-│
-├── requirements.txt
 ├── train.py
 ├── evaluate.py
 └── README.md

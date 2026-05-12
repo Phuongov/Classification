@@ -1,4 +1,4 @@
-""" Tran Le - 08/06/22 
+""" 
 This file contains all utility functions that will be called from other Jupyter notebooks.
 Almost all of these functions are mainly learned from https://jovian.ai/aakashns/collections/deep-learning-with-pytorch
 with some modification.
