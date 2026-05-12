@@ -1,24 +1,113 @@
-# 2D_4classes_mri_classification
+# 2D Alzheimer’s MRI Classification using Deep Learning
 
-This project is about using Pytorch for 2D MRI image classification using transfer learning with Resnet34 with a testing accuracy is 98%.
+A deep learning project for multi-class Alzheimer’s disease classification from brain MRI images using transfer learning with PyTorch. This project evaluates convolutional neural network (CNN) architectures for distinguishing different stages of dementia from 2D MRI scans while addressing common challenges in medical imaging such as class imbalance and data leakage.
 
-The images are downloaded from [Kaggle](https://www.kaggle.com/datasets/tourist55/alzheimers-dataset-4-class-of-images). These images will be classified into four categories, including 
+---
 
-NOD: Non Demented, \
-VMD: Very Mild Demented, \
-MID: Mild Demented, \
-MOD: Moderate Demented. 
+## Overview
 
-Index | Description | Jupiter notebook| Content | data | 
-------------- | ------------- |---------------|------------|--------------|
-1 | Val_accuracy: 0.98 <br> Testing accuracy: 0.68 😢 | [01_Resrnet34.ipynb](https://github.com/tranktle/2022_mri_classification/blob/main/01-Resnet34.ipynb) |Download data <br> split to train, val, test <br> Train with Resnet34 <br> Testing evaluation <br> Reasoning | org_day|
-2 | Val_accuracy: 0.99 <br> Testing accuracy: 0.98 😃 <br> Is this approach ok? 🤔| [02_Resnet34.ipynb](https://github.com/tranktle/2022_mri_classification/blob/main/02-Resnet34.ipynb)| Combine data<br> Split data <br> Train model<br> Evaluate the model| allnew|
+Alzheimer’s disease is a progressive neurodegenerative disorder that affects memory and cognitive function. Early detection is important for clinical intervention and disease management.
 
-For utility functions, please see [mymodulo.py](https://github.com/tranktle/2022_mri_classification/blob/main/mymodule.py)
+This project develops a deep learning pipeline using transfer learning on pretrained CNN architectures to classify MRI brain images into four dementia categories:
+
+| Class | Description |
+|---|---|
+| NOD | Non Demented |
+| VMD | Very Mild Demented |
+| MID | Mild Demented |
+| MOD | Moderate Demented |
+
+The project focuses not only on predictive performance, but also on:
+- reproducible deep learning workflows,
+- medical imaging evaluation metrics,
+- class imbalance handling,
+- and explainability for clinical interpretation.
+
+---
+
+## Dataset
+
+MRI images were obtained from the Kaggle Alzheimer MRI dataset:
+
+[Kaggle Alzheimer MRI Dataset](https://www.kaggle.com/datasets/tourist55/alzheimers-dataset-4-class-of-images)
+
+The dataset contains labeled 2D MRI images corresponding to four dementia stages.
+
+---
+
+## Objectives
+
+- Build a deep learning model for Alzheimer’s MRI classification
+- Evaluate transfer learning strategies using pretrained CNN models
+- Compare model performance across dementia stages
+- Investigate the impact of data splitting strategies on model generalization
+- Improve interpretability using visualization techniques
+
+---
+
+## Methods
+
+### Deep Learning Framework
+- PyTorch
+- Torchvision
+- Transfer Learning
+
+### CNN Architectures Evaluated
+- ResNet18
+- ResNet34
+- DenseNet121
+
+### Data Processing
+- Image resizing and normalization
+- Data augmentation
+- Stratified train/validation/test split
+
+### Training Strategies
+- Transfer learning with pretrained ImageNet weights
+- Weighted cross-entropy loss for class imbalance
+- Early stopping and model checkpointing
+
+### Evaluation Metrics
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+- Confusion matrix
+
+### Explainability
+- Grad-CAM visualization
+- Saliency map analysis
+
+---
 
 ## Project Structure
-- 01-Resnet34.ipynb, 02-Resnet34.ipynb: Two main run files.
-- mymodule.py: all utility functions used in the project.
-- model: folder contains trained model. 
-- Data: contains data after being downloaded. 
 
+```text
+alzheimers-mri-classification/
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│
+├── notebooks/
+│   ├── exploratory_analysis.ipynb
+│   ├── model_training.ipynb
+│   └── evaluation.ipynb
+│
+├── src/
+│   ├── datasets/
+│   ├── models/
+│   ├── training/
+│   ├── evaluation/
+│   ├── visualization/
+│   └── utils/
+│
+├── figures/
+│
+├── results/
+│
+├── requirements.txt
+├── train.py
+├── evaluate.py
+└── README.md
